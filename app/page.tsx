@@ -6,7 +6,7 @@ import Image from 'next/image';
 
 // Hook para detectar si un elemento está en pantalla
 const useInView = (threshold = 0.1) => {
-  const ref = useRef<HTMLElement | null>(null);
+  const ref = useRef<HTMLDivElement | null>(null);
   const [isIntersecting, setIntersecting] = useState(false);
 
   useEffect(() => {
@@ -137,6 +137,7 @@ const QuomosLanding = () => {
               autoPlay
               muted
               playsInline
+              style={{ mixBlendMode: 'multiply' }}
             />
           )}
         </div>
@@ -168,14 +169,13 @@ const QuomosLanding = () => {
         ))}
       </div>
 
-      {/* Nuestra colección con textura */}
+      {/* Nuestra colección */}
       <div
         ref={nuestraColeccion.ref}
         className={`relative max-w-5xl mx-auto mt-24 text-left px-6 fade-up ${
           nuestraColeccion.isIntersecting ? 'show' : ''
         }`}
       >
-        {/* Fondo de textura */}
         <div className="absolute left-1/2 -translate-x-1/2 top-0 w-screen h-full z-0 pointer-events-none">
           <div
             className="w-full h-full"
@@ -189,7 +189,6 @@ const QuomosLanding = () => {
           />
         </div>
 
-        {/* Contenido */}
         <div className="relative z-10">
           <h2 className="text-3xl font-museo font-bold tracking-tight mb-8">
             Nuestra colección
@@ -206,9 +205,8 @@ const QuomosLanding = () => {
                   <Image
                     src={`/${nombre}`}
                     alt={titulo}
-                    layout="fill"
-                    objectFit="contain"
-                    className="rounded-md"
+                    fill
+                    className="rounded-md object-contain"
                   />
                 </div>
                 <p className="text-center mt-2 text-sm font-medium">{titulo}</p>
@@ -222,7 +220,7 @@ const QuomosLanding = () => {
                     : index === 2
                     ? 'Ariel Scornik, 1971-1972'
                     : index === 3
-                    ? 'Ricardo Blanco, Osvaldo Fausi, Mario Mariño, Pedro Backis, Hector ferrari, 1979-1982'
+                    ? 'Ricardo Blanco y equipo, 1979-1982'
                     : index === 4
                     ? 'Verónica Fieiras, 2020'
                     : index === 5
@@ -230,7 +228,7 @@ const QuomosLanding = () => {
                     : index === 6
                     ? 'Diana Cabezas, 2009'
                     : index === 7
-                    ? 'Estudio Gonzáles Ruiz y Shakespear, 1971-1972'
+                    ? 'Estudio González Ruiz y Shakespear, 1972'
                     : index === 8
                     ? 'Amancio Williams, 1952-2000'
                     : index === 9
@@ -240,7 +238,7 @@ const QuomosLanding = () => {
                     : index === 11
                     ? 'Ricardo Carpani, 1985'
                     : index === 12
-                    ? 'Secretaría de Prensa y Difusión, 1979-1982'
+                    ? 'Sec. de Prensa y Difusión, 1979-82'
                     : index === 13
                     ? 'Alejandro Cristoff, 1931-1992'
                     : 'José de la Peña, 1813'}
@@ -273,8 +271,8 @@ const QuomosLanding = () => {
                 <Image
                   src={`/${lugar}.png`}
                   alt={lugar}
-                  layout="fill"
-                  objectFit="cover"
+                  fill
+                  className="object-cover"
                 />
               </div>
               <p className="text-center mt-4 text-base font-medium">
@@ -286,41 +284,40 @@ const QuomosLanding = () => {
       </div>
 
       {/* App */}
-<div
-  ref={app.ref}
-  className={`max-w-2xl mx-auto mt-12 text-center px-6 fade-up ${
-    app.isIntersecting ? 'show' : ''
-  }`}
->
-  <p className="text-xl font-semibold mb-4">Descargá nuestra app</p>
-  <a
-    href="https://www.figma.com/proto/8bqgSw9msYrsvkqW6WblDL/paginawebquomos?page-id=97%3A1003&node-id=97-1311&viewport=223%2C453%2C0.19&t=fquuVKtlPtZasV8K-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=97%3A1004&show-proto-sidebar=1"
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    <button className="bg-[#EF3B24] text-white font-bold rounded-full py-3 px-12 text-lg hover:scale-105 hover:opacity-90 transition">
-      Acá
-    </button>
-  </a>
-</div>
+      <div
+        ref={app.ref}
+        className={`max-w-2xl mx-auto mt-12 text-center px-6 fade-up ${
+          app.isIntersecting ? 'show' : ''
+        }`}
+      >
+        <p className="text-xl font-semibold mb-4">Descargá nuestra app</p>
+        <a
+          href="https://www.figma.com/design/8bqgSw9msYrsvkqW6WblDL/paginawebquomos?node-id=97-1003&t=Tn5usjZC0fGM9LVd-1"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <button className="bg-[#EF3B24] text-white font-bold rounded-full py-3 px-12 text-lg hover:scale-105 hover:opacity-90 transition">
+            Acá
+          </button>
+        </a>
+      </div>
 
-<div
-  className={`max-w-2xl mx-auto mt-12 text-center px-6 fade-up ${
-    app.isIntersecting ? 'show' : ''
-  }`}
->
-  <p className="text-xl font-semibold mb-4">Seguinos en Instagram @quomos__</p>
-  <a
-    href="https://www.instagram.com/quomos__/?hl=es"
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    <button className="bg-[#EF3B24] text-white font-bold rounded-full py-3 px-12 text-lg hover:scale-105 hover:opacity-90 transition">
-      Acá
-    </button>
-  </a>
-</div>
-
+      <div
+        className={`max-w-2xl mx-auto mt-12 text-center px-6 fade-up ${
+          app.isIntersecting ? 'show' : ''
+        }`}
+      >
+        <p className="text-xl font-semibold mb-4">Seguinos en Instagram @quomos__</p>
+        <a
+          href="https://www.instagram.com/quomos__/?hl=es"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <button className="bg-[#EF3B24] text-white font-bold rounded-full py-3 px-12 text-lg hover:scale-105 hover:opacity-90 transition">
+            Acá
+          </button>
+        </a>
+      </div>
 
       {/* Footer */}
       <footer className="mt-24 py-12 border-t border-neutral-300 text-center text-sm text-neutral-500">
@@ -331,3 +328,4 @@ const QuomosLanding = () => {
 };
 
 export default QuomosLanding;
+
